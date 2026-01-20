@@ -3,49 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StockShift - Deadstock Marketplace | Rescue. Redistribute. Renew.</title>
-    <meta name="description" content="Rescue quality fashion and FMCG deadstock. Save 30-80% on premium products while reducing commercial waste.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>StockShift ⏰ | Rescue Expiring Products | Save 70%+ Before It's Too Late</title>
+    <meta name="description" content="Race against time to rescue premium products before expiry. Real-time countdowns show urgency. Save up to 80% on fashion and FMCG deadstock.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
     <style>
-        /* ===== ROOT VARIABLES ===== */
+        /* ===== URGENCY THEME VARIABLES ===== */
         :root {
-            --primary: #2E8B57;
-            --primary-dark: #26794d;
-            --primary-light: #E8F5E9;
-            --secondary: #FF7F50;
-            --secondary-dark: #E66A3D;
-            --accent: #4A90E2;
-            --accent-dark: #3A7BC8;
-            --background: #F9F9F9;
-            --surface: #FFFFFF;
-            --text-primary: #1A1A1A;
-            --text-secondary: #666666;
-            --text-tertiary: #999999;
-            --border: #E5E7EB;
-            --border-light: #F0F0F0;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --info: #3B82F6;
+            --urgency-red: #FF4444;
+            --urgency-orange: #FF7F50;
+            --urgency-yellow: #FFD700;
+            --urgency-green: #2E8B57;
+            --urgency-blue: #4A90E2;
+            --urgency-purple: #8A2BE2;
             
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 40px rgba(0,0,0,0.15);
+            --bg-dark: #0A0F1C;
+            --bg-card: #1A2238;
+            --bg-surface: #141B2D;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B7C3;
+            --text-tertiary: #7A8499;
+            --border: #2A344A;
             
-            --radius-sm: 6px;
-            --radius-md: 10px;
+            --pulse-red: rgba(255, 68, 68, 0.3);
+            --pulse-orange: rgba(255, 127, 80, 0.3);
+            --pulse-green: rgba(46, 139, 87, 0.3);
+            
+            --shadow-urgency: 0 0 30px rgba(255, 68, 68, 0.4);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 24px;
             
-            --transition-fast: 0.15s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ===== RESET & BASE STYLES ===== */
+        /* ===== BASE RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -59,7 +56,7 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--background);
+            background: var(--bg-dark);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
@@ -67,641 +64,428 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
-
-        button {
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        input, select, textarea {
-            font-family: inherit;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all var(--transition-normal);
+        /* ===== URGENCY BANNER ===== */
+        .urgency-banner {
+            background: linear-gradient(90deg, var(--urgency-red) 0%, var(--urgency-orange) 100%);
+            padding: 12px 0;
             text-align: center;
-            cursor: pointer;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: var(--secondary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-        }
-
-        .btn-lg {
-            padding: 1rem 2rem;
-            font-size: 1.125rem;
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        .btn-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            padding: 0;
-            border-radius: 50%;
-        }
-
-        /* ===== BADGES ===== */
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge-primary {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .badge-secondary {
-            background: rgba(255, 127, 80, 0.1);
-            color: var(--secondary);
-        }
-
-        .badge-accent {
-            background: rgba(74, 144, 226, 0.1);
-            color: var(--accent);
-        }
-
-        .badge-success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .badge-warning {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--warning);
-        }
-
-        .badge-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        /* ===== HEADER ===== */
-        .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--surface);
-            box-shadow: var(--shadow-md);
-            z-index: 1000;
-            transition: all var(--transition-normal);
+            z-index: 2000;
+            animation: pulse-banner 2s infinite;
         }
 
-        .header.scrolled {
-            padding: 0.5rem 0;
+        @keyframes pulse-banner {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .urgency-banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .urgency-banner .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: rgba(26, 34, 56, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .header-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 0;
+            padding: 16px 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
             text-decoration: none;
         }
 
         .logo-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--primary);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .logo-text h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            line-height: 1.2;
-        }
-
-        .logo-text span {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.5px;
-        }
-
-        /* Navigation */
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            position: relative;
-            font-weight: 600;
-            color: var(--text-secondary);
-            padding: 0.5rem;
-            transition: color var(--transition-fast);
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-            transition: transform var(--transition-normal);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            transform: translateX(-50%) scaleX(1);
-        }
-
-        /* Search */
-        .search-container {
-            position: relative;
-            flex: 1;
-            max-width: 400px;
-            margin: 0 2rem;
-        }
-
-        .search-box {
-            position: relative;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-            pointer-events: none;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 3rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            font-size: 0.875rem;
-            transition: all var(--transition-normal);
-            background: var(--background);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
-            background: white;
-        }
-
-        /* Header Actions */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .action-btn {
-            position: relative;
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 40px;
+            height: 40px;
+            background: var(--urgency-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-            background: var(--background);
+            animation: rotate 20s linear infinite;
         }
 
-        .action-btn:hover {
-            color: var(--primary);
-            background: var(--primary-light);
-            transform: translateY(-1px);
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .badge-count {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            min-width: 1.25rem;
-            height: 1.25rem;
-            background: var(--secondary);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 0.25rem;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            position: relative;
-            padding-top: 120px;
-            padding-bottom: 80px;
-            background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%);
-            overflow: hidden;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--urgency-red) 0%, var(--urgency-orange) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-text p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .hero-buttons {
+        /* ===== COUNTDOWN CLOCK ===== */
+        .global-countdown {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--urgency-red);
         }
 
-        .hero-image {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, var(--primary) 0%, var(--accent) 100%);
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
+        .countdown-label {
+            font-size: 12px;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
-        /* ===== FEATURES SECTION ===== */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
+        .countdown-timer {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--urgency-red);
         }
 
-        .feature-card {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-normal);
-            border: 1px solid transparent;
+        /* ===== MAIN LAYOUT ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 120px auto 0;
+            padding: 0 20px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--primary-light);
+        /* ===== TIME-LAPSE VISUALIZATION ===== */
+        .timeline-section {
+            margin-bottom: 60px;
         }
 
-        .feature-icon {
-            width: 4rem;
-            height: 4rem;
-            background: var(--primary-light);
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .timeline-title {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--urgency-red) 0%, var(--urgency-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .timeline-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        .timeline-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .timeline-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(90deg, var(--urgency-green) 0%, var(--urgency-orange) 50%, var(--urgency-red) 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
+            background: var(--text-primary);
+            border: 2px solid currentColor;
+        }
+
+        .timeline-marker.passed {
+            background: var(--urgency-green);
+            box-shadow: 0 0 10px var(--urgency-green);
+        }
+
+        .timeline-marker.current {
+            background: var(--urgency-orange);
+            box-shadow: 0 0 15px var(--urgency-orange);
+            animation: pulse-marker 1.5s infinite;
+        }
+
+        .timeline-marker.upcoming {
+            background: var(--urgency-red);
+            box-shadow: 0 0 10px var(--urgency-red);
+        }
+
+        @keyframes pulse-marker {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+
+        .timeline-label {
+            position: absolute;
+            top: 20px;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+        }
+
+        .timeline-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .timeline-stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: 'Roboto Mono', monospace;
+            margin-bottom: 4px;
+        }
+
+        .stat-value.rescued { color: var(--urgency-green); }
+        .stat-value.expiring { color: var(--urgency-orange); }
+        .stat-value.expired { color: var(--urgency-red); }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== URGENCY PRODUCT GRID ===== */
+        .urgency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        /* ===== PRODUCT CARD WITH COUNTDOWN ===== */
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--urgency-orange);
+        }
+
+        .product-card.critical {
+            border-color: var(--urgency-red);
+            box-shadow: var(--shadow-urgency);
+        }
+
+        .product-card.critical:hover {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateY(-4px); }
+            25% { transform: translateY(-4px) rotate(1deg); }
+            75% { transform: translateY(-4px) rotate(-1deg); }
+        }
+
+        .product-urgency {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 2;
+        }
+
+        .urgency-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .urgency-badge.critical {
+            background: var(--urgency-red);
+            color: white;
+            animation: pulse-critical 1s infinite;
+        }
+
+        @keyframes pulse-critical {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(255, 68, 68, 0); }
+        }
+
+        .urgency-badge.warning {
+            background: var(--urgency-orange);
+            color: white;
+        }
+
+        .urgency-badge.safe {
+            background: var(--urgency-green);
+            color: white;
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--border) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            line-height: 1.6;
-        }
-
-        /* ===== IMPACT SECTION ===== */
-        .impact {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white;
-            border-radius: var(--radius-xl);
-            padding: 4rem;
-            margin: 4rem 0;
             position: relative;
             overflow: hidden;
         }
 
-        .impact::before {
+        .product-image::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7) 100%);
         }
 
-        .impact-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
+        .product-countdown {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            z-index: 2;
         }
 
-        .impact-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+        .countdown-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 8px;
         }
 
-        .impact-subtitle {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .countdown-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 1s linear;
         }
 
-        .impact-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
+        .countdown-fill.critical { background: var(--urgency-red); }
+        .countdown-fill.warning { background: var(--urgency-orange); }
+        .countdown-fill.safe { background: var(--urgency-green); }
 
-        .impact-stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            opacity: 0.8;
-        }
-
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* ===== PRODUCTS SECTION ===== */
-        .products-header {
+        .countdown-text {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2rem;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Product Card */
-        .product-card {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-normal);
-            position: relative;
-            border: 1px solid var(--border-light);
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--primary);
-        }
-
-        .product-badges {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            z-index: 1;
-        }
-
-        .product-image {
-            height: 200px;
-            background: linear-gradient(45deg, var(--background) 0%, var(--border) 100%);
-            display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform var(--transition-slow);
+        .countdown-time {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
+        .countdown-label-small {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .product-content {
-            padding: 1.5rem;
+            padding: 20px;
         }
 
         .product-category {
-            font-size: 0.75rem;
+            font-size: 11px;
             color: var(--text-tertiary);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
         }
 
         .product-title {
-            font-size: 1.125rem;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .product-description {
-            font-size: 0.875rem;
+            font-size: 14px;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 16px;
             line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -712,29 +496,28 @@
         .product-price {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .price-original {
-            font-size: 0.875rem;
+            font-size: 14px;
             color: var(--text-tertiary);
             text-decoration: line-through;
         }
 
         .price-current {
-            font-size: 1.25rem;
+            font-size: 24px;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--urgency-green);
         }
 
         .price-discount {
-            background: var(--secondary);
+            background: var(--urgency-red);
             color: white;
-            padding: 0.25rem 0.5rem;
+            padding: 4px 8px;
             border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            font-size: 12px;
             font-weight: 700;
         }
 
@@ -742,258 +525,243 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 1rem;
+            padding-top: 16px;
             border-top: 1px solid var(--border);
-            margin-top: 1rem;
+            margin-top: 16px;
         }
 
         .product-stock,
-        .product-condition {
+        .product-location {
             display: flex;
             align-items: center;
-            gap: 0.375rem;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-tertiary);
         }
 
         .product-actions {
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 8px;
+            margin-top: 16px;
         }
 
-        /* FMCG Specific */
-        .fmcg-card {
-            border-left: 4px solid var(--warning);
-        }
-
-        .expiry-info {
-            background: rgba(245, 158, 11, 0.1);
-            padding: 0.75rem;
-            border-radius: var(--radius-md);
-            margin-bottom: 1rem;
-        }
-
-        .expiry-date {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--warning);
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        /* ===== CATEGORY TABS ===== */
-        .category-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .category-tabs::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .category-tabs::-webkit-scrollbar-track {
-            background: var(--border);
-            border-radius: 2px;
-        }
-
-        .category-tabs::-webkit-scrollbar-thumb {
-            background: var(--text-tertiary);
-            border-radius: 2px;
-        }
-
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            color: var(--text-secondary);
-            background: var(--background);
-            white-space: nowrap;
-            transition: all var(--transition-fast);
-            border: 1px solid transparent;
-        }
-
-        .tab-btn:hover {
-            color: var(--primary);
-            background: var(--primary-light);
-        }
-
-        .tab-btn.active {
-            color: white;
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        /* ===== FILTERS ===== */
-        .filters {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 2rem;
-        }
-
-        .filter-group {
-            margin-bottom: 2rem;
-        }
-
-        .filter-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .filter-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .filter-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .filter-option {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-        }
-
-        .filter-checkbox {
-            width: 1.25rem;
-            height: 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            display: flex;
+        .btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
             transition: all var(--transition-fast);
-            flex-shrink: 0;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
         }
 
-        .filter-checkbox.checked {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .filter-checkbox.checked::after {
-            content: '✓';
+        .btn-rescue {
+            background: linear-gradient(135deg, var(--urgency-red) 0%, var(--urgency-orange) 100%);
             color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
         }
 
-        .filter-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            user-select: none;
+        .btn-rescue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 68, 68, 0.3);
         }
 
-        .filter-count {
-            margin-left: auto;
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            background: var(--background);
-            padding: 0.125rem 0.375rem;
-            border-radius: 2rem;
+        .btn-view {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
-        /* ===== SELLER DASHBOARD ===== */
-        .dashboard {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
+        .btn-view:hover {
+            background: var(--bg-surface);
+            border-color: var(--urgency-blue);
+        }
+
+        /* ===== STORY SECTION ===== */
+        .story-section {
+            background: var(--bg-surface);
+            border-radius: var(--radius-xl);
+            padding: 60px;
+            margin-bottom: 60px;
+            position: relative;
             overflow: hidden;
-            min-height: 600px;
         }
 
-        .dashboard-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white;
-            padding: 2rem;
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--urgency-green) 0%, var(--urgency-orange) 50%, var(--urgency-red) 100%);
         }
 
-        .dashboard-welcome {
-            display: flex;
+        .story-title {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--urgency-green) 0%, var(--urgency-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
         }
 
-        .dashboard-avatar {
-            width: 4rem;
-            height: 4rem;
-            background: white;
+        .story-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .story-text p {
+            margin-bottom: 24px;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .story-stat {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .story-stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            font-family: 'Roboto Mono', monospace;
+            margin-bottom: 8px;
+        }
+
+        .story-stat-label {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .story-visual {
+            position: relative;
+            height: 400px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .story-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.3) 0%, rgba(74, 144, 226, 0.3) 100%);
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-section {
+            margin-bottom: 100px;
+        }
+
+        .about-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all var(--transition-normal);
+        }
+
+        .about-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--urgency-blue);
+            box-shadow: var(--shadow-card);
+        }
+
+        .about-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--urgency-blue) 0%, var(--urgency-purple) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            font-size: 1.5rem;
+            margin: 0 auto 24px;
+            font-size: 32px;
         }
 
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+        .about-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
-        .dashboard-stat {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: var(--radius-md);
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .about-card-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: #1A1A1A;
-            color: white;
-            padding: 4rem 0 2rem;
-            margin-top: 4rem;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 3rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-brand {
-            grid-column: span 2;
+            grid-column: span 1;
         }
 
         .footer-title {
-            font-size: 1rem;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: white;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .footer-links {
@@ -1001,421 +769,125 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 12px;
         }
 
         .footer-links a {
-            color: #B0B0B0;
-            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
             transition: color var(--transition-fast);
+            font-size: 14px;
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--urgency-green);
         }
 
         .footer-contact {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 16px;
+            margin-top: 20px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            color: #B0B0B0;
-            font-size: 0.875rem;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-tertiary);
+            font-size: 14px;
         }
 
         .footer-social {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 16px;
         }
 
         .social-link {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: #333;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background: var(--bg-card);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--text-secondary);
             transition: all var(--transition-fast);
         }
 
         .social-link:hover {
-            background: var(--primary);
+            background: var(--urgency-green);
+            color: white;
             transform: translateY(-2px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #333;
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .copyright {
-            color: #B0B0B0;
-            font-size: 0.875rem;
-        }
-
-        .footer-bottom-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-bottom-links a {
-            color: #B0B0B0;
-            font-size: 0.875rem;
-            transition: color var(--transition-fast);
-        }
-
-        .footer-bottom-links a:hover {
-            color: white;
-        }
-
-        /* ===== MODALS & OVERLAYS ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            display: none;
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity var(--transition-normal);
-        }
-
-        .modal-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: var(--surface);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-xl);
-            z-index: 2001;
-            opacity: 0;
-            transition: all var(--transition-normal);
-            max-width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .modal-header {
-            padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .modal-close {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-        }
-
-        .modal-close:hover {
-            background: var(--background);
-            color: var(--text-primary);
-        }
-
-        .modal-content {
-            padding: 2rem;
-        }
-
-        /* Cart Modal */
-        .cart-modal {
-            width: 400px;
-        }
-
-        .cart-items {
-            max-height: 400px;
-            overflow-y: auto;
-            margin-bottom: 2rem;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-item-image {
-            width: 80px;
-            height: 80px;
-            background: var(--background);
-            border-radius: var(--radius-md);
-            flex-shrink: 0;
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .cart-item-price {
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .quantity-btn {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background: var(--background);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-fast);
-        }
-
-        .quantity-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .cart-item-remove {
-            color: var(--danger);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: color var(--transition-fast);
-        }
-
-        .cart-item-remove:hover {
-            color: var(--danger);
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-            border-top: 2px solid var(--border);
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        /* ===== NOTIFICATIONS ===== */
-        .notification {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 1rem 1.5rem;
-            box-shadow: var(--shadow-xl);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            z-index: 3000;
-            transform: translateX(100%);
-            opacity: 0;
-            transition: all var(--transition-normal);
-        }
-
-        .notification.active {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .notification-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .notification-success .notification-icon {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .notification-error .notification-icon {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .notification-message {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .notification-close {
-            color: var(--text-tertiary);
-            cursor: pointer;
-            transition: color var(--transition-fast);
-        }
-
-        .notification-close:hover {
-            color: var(--text-primary);
-        }
-
-        /* ===== LOADING STATES ===== */
-        .loading {
-            display: inline-block;
-            width: 1.5rem;
-            height: 1.5rem;
-            border: 2px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
-            .hero-content {
+            .story-content {
                 grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.75rem;
-            }
-            
-            .features,
-            .impact-stats {
-                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
             }
             
             .footer-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .footer-brand {
-                grid-column: span 3;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+            .urgency-grid {
+                grid-template-columns: 1fr;
             }
             
-            .nav {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                background: var(--surface);
+            .timeline-container {
                 flex-direction: column;
-                padding: 2rem;
-                box-shadow: var(--shadow-lg);
-                transform: translateY(-100%);
-                opacity: 0;
-                transition: all var(--transition-normal);
-                z-index: 999;
+                gap: 30px;
             }
             
-            .nav.active {
-                transform: translateY(0);
-                opacity: 1;
+            .timeline-progress {
+                width: 100%;
             }
             
-            .search-container {
-                margin: 1rem 0;
-                max-width: none;
+            .timeline-stats {
+                width: 100%;
+                justify-content: space-between;
             }
             
-            .section {
-                padding: 60px 0;
+            .story-section {
+                padding: 40px 20px;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .story-title {
+                font-size: 32px;
             }
             
-            .hero-text h1 {
-                font-size: 2.25rem;
-            }
-            
-            .hero-stats,
-            .impact-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .modal {
-                width: 95%;
+            .story-text {
+                font-size: 16px;
             }
         }
 
         @media (max-width: 480px) {
-            .hero-text h1 {
-                font-size: 1.875rem;
+            .header-container {
+                flex-wrap: wrap;
+                gap: 12px;
             }
             
-            .hero-buttons {
-                flex-direction: column;
+            .global-countdown {
+                order: 3;
+                width: 100%;
+                justify-content: center;
             }
             
-            .features,
-            .impact-stats,
-            .hero-stats {
+            .story-stats {
                 grid-template-columns: 1fr;
             }
             
@@ -1423,1553 +895,831 @@
                 grid-template-columns: 1fr;
             }
             
-            .footer-brand {
-                grid-column: span 1;
-            }
-            
             .footer-bottom {
                 flex-direction: column;
+                gap: 20px;
                 text-align: center;
             }
-            
-            .modal {
-                padding: 1rem;
-            }
-            
-            .modal-header {
-                padding: 1.5rem 1.5rem 1rem;
-            }
-            
-            .modal-content {
-                padding: 1.5rem;
-            }
         }
-
-        /* ===== UTILITY CLASSES ===== */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-primary {
-            color: var(--primary);
-        }
-
-        .text-secondary {
-            color: var(--secondary);
-        }
-
-        .text-accent {
-            color: var(--accent);
-        }
-
-        .text-success {
-            color: var(--success);
-        }
-
-        .text-warning {
-            color: var(--warning);
-        }
-
-        .text-danger {
-            color: var(--danger);
-        }
-
-        .mt-1 { margin-top: 0.25rem; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-3 { margin-top: 0.75rem; }
-        .mt-4 { margin-top: 1rem; }
-        .mt-6 { margin-top: 1.5rem; }
-        .mt-8 { margin-top: 2rem; }
-        .mt-12 { margin-top: 3rem; }
-
-        .mb-1 { margin-bottom: 0.25rem; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 0.75rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-        .mb-8 { margin-bottom: 2rem; }
-        .mb-12 { margin-bottom: 3rem; }
-
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .gap-2 { gap: 0.5rem; }
-        .gap-4 { gap: 1rem; }
-        .gap-6 { gap: 1.5rem; }
-        .gap-8 { gap: 2rem; }
-
-        .grid { display: grid; }
-        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
         /* ===== ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .animate-fade-up {
+            animation: fadeInUp 0.6s ease forwards;
         }
 
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .animate-slide-up {
-            animation: slideUp 0.5s ease forwards;
-        }
-
-        .animate-slide-in-right {
-            animation: slideInRight 0.3s ease forwards;
-        }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="container header-container">
+    <!-- URGENCY BANNER -->
+    <div class="urgency-banner">
+        <div class="urgency-banner-content">
+            <span class="blink">⚡</span>
+            <span>URGENT: Products expiring within 24 hours! Rescue them now before it's too late</span>
+            <span class="blink">⚡</span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
             <!-- Logo -->
-            <a href="#home" class="logo">
+            <a href="#" class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-recycle"></i>
+                    <i class="fas fa-clock"></i>
                 </div>
                 <div class="logo-text">
                     <h1>StockShift</h1>
-                    <span>Rescue. Redistribute. Renew.</span>
+                    <span>Race Against Time</span>
                 </div>
             </a>
 
-            <!-- Desktop Navigation -->
-            <nav class="nav" id="nav">
-                <a href="#home" class="nav-link active">
-                    <i class="fas fa-home"></i> Home
-                </a>
-                <div class="nav-item">
-                    <a href="#fashion" class="nav-link">
-                        <i class="fas fa-tshirt"></i> Fashion
-                    </a>
-                </div>
-                <div class="nav-item">
-                    <a href="#fmcg" class="nav-link">
-                        <i class="fas fa-shopping-basket"></i> FMCG
-                    </a>
-                </div>
-                <div class="nav-item">
-                    <a href="#sell" class="nav-link">
-                        <i class="fas fa-box"></i> Sell
-                    </a>
-                </div>
-                <div class="nav-item">
-                    <a href="#solutions" class="nav-link">
-                        <i class="fas fa-lightbulb"></i> Solutions
-                    </a>
-                </div>
-                <a href="#contact" class="nav-link">
-                    <i class="fas fa-phone"></i> Contact
-                </a>
-            </nav>
-
-            <!-- Search Bar -->
-            <div class="search-container">
-                <div class="search-box">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
-                </div>
+            <!-- Global Countdown -->
+            <div class="global-countdown">
+                <span class="countdown-label">Next Batch Expires In:</span>
+                <span class="countdown-timer" id="globalTimer">23:58:17</span>
             </div>
 
-            <!-- Header Actions -->
-            <div class="header-actions">
-                <button class="action-btn" id="cartBtn">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge-count" id="cartCount">0</span>
+            <!-- Navigation -->
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <button class="btn btn-rescue" onclick="showRescueModal()">
+                    <i class="fas fa-fire"></i> Rescue Now
                 </button>
-                <button class="action-btn" id="userBtn">
-                    <i class="fas fa-user"></i>
-                </button>
-                <button class="action-btn mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
+                <button class="btn btn-view" onclick="scrollToStory()">
+                    <i class="fas fa-book"></i> Our Story
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Rescue Premium Fashion & FMCG at Wholesale Prices</h1>
-                    <p>StockShift connects businesses with excess inventory to buyers seeking quality products at 30-80% off retail. Every purchase reduces commercial waste.</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary btn-lg" onclick="scrollToSection('fashion')">
-                            Shop Fashion <i class="fas fa-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-outline btn-lg" onclick="scrollToSection('fmcg')">
-                            Browse FMCG <i class="fas fa-shopping-basket"></i>
-                        </button>
-                        <button class="btn btn-secondary btn-lg" onclick="openSellModal()">
-                            Sell Your Stock <i class="fas fa-upload"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <!-- Hero image placeholder -->
-                    <div style="padding: 3rem; text-align: center;">
-                        <div style="font-size: 5rem; color: var(--primary); margin-bottom: 1rem;">
-                            <i class="fas fa-boxes-stacked"></i>
-                        </div>
-                        <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">Premium Deadstock</h3>
-                        <p style="color: var(--text-secondary);">Quality products waiting for new homes</p>
-                    </div>
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
+        <!-- TIME-LAPSE VISUALIZATION -->
+        <section class="timeline-section animate-fade-up">
+            <div class="timeline-header">
+                <div>
+                    <h2 class="timeline-title">The Race Against Waste</h2>
+                    <p class="timeline-subtitle">Watch products move through their lifecycle. Every second counts.</p>
                 </div>
             </div>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number" data-count="45892">0</div>
-                    <div class="stat-label">Products Rescued</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="187.45">0</div>
-                    <div class="stat-label">Tons Waste Diverted</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="1245">0</div>
-                    <div class="stat-label">Tonnes CO₂ Saved</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="125.8">0</div>
-                    <div class="stat-label">K$ Charity Impact</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Why Choose StockShift?</h2>
-            <p class="section-subtitle">We make deadstock clearance simple, profitable, and sustainable for everyone involved.</p>
+            <div class="timeline-container">
+                <div class="timeline-progress">
+                    <div class="timeline-fill" id="timelineFill"></div>
+                    
+                    <!-- Timeline Markers -->
+                    <div class="timeline-marker passed" style="left: 0%;"></div>
+                    <div class="timeline-marker passed" style="left: 25%;"></div>
+                    <div class="timeline-marker current" style="left: 65%;"></div>
+                    <div class="timeline-marker upcoming" style="left: 85%;"></div>
+                    <div class="timeline-marker upcoming" style="left: 100%;"></div>
+                    
+                    <!-- Timeline Labels -->
+                    <div class="timeline-label" style="left: 0%;">Production</div>
+                    <div class="timeline-label" style="left: 25%;">Shelf Life</div>
+                    <div class="timeline-label" style="left: 65%;">Near Expiry</div>
+                    <div class="timeline-label" style="left: 85%;">Critical Zone</div>
+                    <div class="timeline-label" style="left: 100%;">Expiry</div>
+                </div>
+
+                <div class="timeline-stats">
+                    <div class="timeline-stat">
+                        <div class="stat-value rescued" id="rescuedCount">0</div>
+                        <div class="stat-label">Rescued Today</div>
+                    </div>
+                    <div class="timeline-stat">
+                        <div class="stat-value expiring" id="expiringCount">0</div>
+                        <div class="stat-label">Expiring Soon</div>
+                    </div>
+                    <div class="timeline-stat">
+                        <div class="stat-value expired" id="expiredCount">0</div>
+                        <div class="stat-label">Expired (Lost)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- URGENT PRODUCTS GRID -->
+        <section class="animate-fade-up delay-1">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+                <div>
+                    <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">🔥 Critical Rescue Zone</h2>
+                    <p style="color: var(--text-secondary);">Products with less than 48 hours remaining. Act fast!</p>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-view" onclick="filterUrgency('critical')">
+                        <i class="fas fa-fire"></i> Critical Only
+                    </button>
+                    <button class="btn btn-view" onclick="filterUrgency('all')">
+                        <i class="fas fa-filter"></i> All Urgencies
+                    </button>
+                </div>
+            </div>
+
+            <div class="urgency-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- STORY SECTION -->
+        <section class="story-section animate-fade-up delay-2" id="story">
+            <h2 class="story-title">Why We Race Against Time</h2>
             
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-percentage"></i>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>Every year, millions of perfectly good products reach their expiry dates and are destroyed. Fashion items are shredded. FMCG products are dumped. All while people need them and businesses lose revenue.</p>
+                    
+                    <p>StockShift was born from a simple idea: What if we could see expiry not as an endpoint, but as a deadline for action? What if every product had a visible countdown, pushing us to act before it's too late?</p>
+                    
+                    <p>We're not just a marketplace. We're a rescue mission. Every product you see here is racing against time. Your purchase doesn't just get you a great deal—it completes a rescue operation.</p>
+                    
+                    <div class="story-stats">
+                        <div class="story-stat">
+                            <div class="story-stat-value" id="totalRescues">42,891</div>
+                            <div class="story-stat-label">Total Rescues</div>
+                        </div>
+                        <div class="story-stat">
+                            <div class="story-stat-value" id="wasteDiverted">187.5</div>
+                            <div class="story-stat-label">Tons Saved</div>
+                        </div>
+                        <div class="story-stat">
+                            <div class="story-stat-value" id="charityImpact">$125K</div>
+                            <div class="story-stat-label">Charity Impact</div>
+                        </div>
+                        <div class="story-stat">
+                            <div class="story-stat-value" id="co2Saved">1,245</div>
+                            <div class="story-stat-label">Tonnes CO₂</div>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Massive Savings</h3>
-                    <p class="feature-description">Get 30-80% off retail prices on premium fashion and FMCG products.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+                
+                <div class="story-visual">
+                    <!-- Visual representation of the rescue timeline -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 30px;">
+                        <div style="background: rgba(255, 68, 68, 0.8); padding: 10px; border-radius: var(--radius-sm); text-align: center; font-weight: 700;">
+                            EXPIRY ZONE
+                        </div>
+                        <div style="background: rgba(255, 127, 80, 0.8); padding: 10px; border-radius: var(--radius-sm); text-align: center; font-weight: 700; margin: 0 20px;">
+                            RESCUE WINDOW
+                        </div>
+                        <div style="background: rgba(46, 139, 87, 0.8); padding: 10px; border-radius: var(--radius-sm); text-align: center; font-weight: 700;">
+                            SAFE ZONE
+                        </div>
                     </div>
-                    <h3 class="feature-title">Quality Guaranteed</h3>
-                    <p class="feature-description">All products vetted for condition. FMCG within best-before dates.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-truck-fast"></i>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="about-section animate-fade-up delay-3" id="about">
+            <h2 class="about-title">How The Rescue Works</h2>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-bell"></i>
                     </div>
-                    <h3 class="feature-title">Fast Processing</h3>
-                    <p class="feature-description">Quick dispatch from verified sellers with reliable shipping.</p>
+                    <h3 class="about-card-title">Early Detection</h3>
+                    <p class="about-card-text">We identify products 60-90 days before expiry, giving maximum time for rescue operations.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="about-card-title">Urgency Amplification</h3>
+                    <p class="about-card-text">As expiry approaches, products get promoted more aggressively with countdown timers.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="about-card-title">Smart Matching</h3>
+                    <p class="about-card-text">We connect expiring products with buyers who need them most, from charities to discount retailers.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <h3 class="feature-title">Sustainable Impact</h3>
-                    <p class="feature-description">Track your environmental impact with every purchase.</p>
+                    <h3 class="about-card-title">Last Resort Rescue</h3>
+                    <p class="about-card-text">If products reach critical stage, they're automatically offered to recycling/composting partners.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Fashion Section -->
-    <section class="section" id="fashion">
-        <div class="container">
-            <div class="products-header">
-                <div>
-                    <h2 class="section-title">Fashion Deadstock</h2>
-                    <p class="section-subtitle">Quality apparel, footwear & accessories at wholesale prices</p>
-                </div>
-                <a href="#view-all-fashion" class="btn btn-outline">
-                    View All <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- Category Tabs -->
-            <div class="category-tabs">
-                <button class="tab-btn active" data-category="all">All Products</button>
-                <button class="tab-btn" data-category="apparel">Apparel</button>
-                <button class="tab-btn" data-category="footwear">Footwear</button>
-                <button class="tab-btn" data-category="accessories">Accessories</button>
-                <button class="tab-btn" data-category="fabrics">Fabrics</button>
-            </div>
-
-            <!-- Filters -->
-            <div class="filters">
-                <div class="grid grid-cols-4 gap-6">
-                    <div class="filter-group">
-                        <div class="filter-title">
-                            <i class="fas fa-filter"></i> Price Range
-                        </div>
-                        <div class="filter-options">
-                            <div class="filter-option" data-filter="price" data-value="0-25">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Under $25</span>
-                                <span class="filter-count">42</span>
-                            </div>
-                            <div class="filter-option" data-filter="price" data-value="25-50">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">$25 - $50</span>
-                                <span class="filter-count">38</span>
-                            </div>
-                            <div class="filter-option" data-filter="price" data-value="50-100">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">$50 - $100</span>
-                                <span class="filter-count">24</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <div class="filter-title">
-                            <i class="fas fa-ruler"></i> Size
-                        </div>
-                        <div class="filter-options">
-                            <div class="filter-option" data-filter="size" data-value="s">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Small</span>
-                                <span class="filter-count">18</span>
-                            </div>
-                            <div class="filter-option" data-filter="size" data-value="m">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Medium</span>
-                                <span class="filter-count">26</span>
-                            </div>
-                            <div class="filter-option" data-filter="size" data-value="l">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Large</span>
-                                <span class="filter-count">22</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <div class="filter-title">
-                            <i class="fas fa-palette"></i> Color
-                        </div>
-                        <div class="filter-options">
-                            <div class="filter-option" data-filter="color" data-value="black">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Black</span>
-                                <span class="filter-count">31</span>
-                            </div>
-                            <div class="filter-option" data-filter="color" data-value="white">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">White</span>
-                                <span class="filter-count">28</span>
-                            </div>
-                            <div class="filter-option" data-filter="color" data-value="blue">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Blue</span>
-                                <span class="filter-count">19</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <div class="filter-title">
-                            <i class="fas fa-tag"></i> Condition
-                        </div>
-                        <div class="filter-options">
-                            <div class="filter-option" data-filter="condition" data-value="new">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">New with tags</span>
-                                <span class="filter-count">45</span>
-                            </div>
-                            <div class="filter-option" data-filter="condition" data-value="sample">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Samples</span>
-                                <span class="filter-count">12</span>
-                            </div>
-                            <div class="filter-option" data-filter="condition" data-value="overrun">
-                                <div class="filter-checkbox"></div>
-                                <span class="filter-label">Overruns</span>
-                                <span class="filter-count">27</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Products Grid -->
-            <div class="products-grid" id="fashionProducts">
-                <!-- Products will be loaded here dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Section -->
-    <section class="impact">
-        <div class="container">
-            <div class="impact-content">
-                <h2 class="impact-title">Your Impact Matters</h2>
-                <p class="impact-subtitle">Every purchase on StockShift contributes to a more sustainable future. Here's what our community has achieved so far:</p>
-                
-                <div class="impact-stats">
-                    <div class="impact-stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-box-open"></i>
-                        </div>
-                        <div class="stat-value" id="impactProducts">0</div>
-                        <div class="stat-label">Products Rescued</div>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-trash-restore"></i>
-                        </div>
-                        <div class="stat-value" id="impactWaste">0</div>
-                        <div class="stat-label">Tons Waste Diverted</div>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <div class="stat-value" id="impactCO2">0</div>
-                        <div class="stat-label">Tonnes CO₂ Saved</div>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="stat-icon">
-                            <i class="fas fa-hands-helping"></i>
-                        </div>
-                        <div class="stat-value" id="impactCharity">0</div>
-                        <div class="stat-label">K$ Charity Donations</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FMCG Section -->
-    <section class="section" id="fmcg">
-        <div class="container">
-            <div class="products-header">
-                <div>
-                    <h2 class="section-title">FMCG Overstock</h2>
-                    <p class="section-subtitle">Quality products approaching best-before dates at wholesale prices</p>
-                </div>
-                <a href="#view-all-fmcg" class="btn btn-outline">
-                    View All <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- Safety Notice -->
-            <div class="filters mb-8" style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--warning);">
-                <div class="flex items-center gap-4">
-                    <div style="font-size: 2rem; color: var(--warning);">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div>
-                        <h3 style="font-weight: 700; margin-bottom: 0.5rem; color: var(--warning);">Quality & Safety Guarantee</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem;">
-                            All FMCG products are within best-before dates and stored according to manufacturer specifications. 
-                            Best-before dates indicate quality, not safety. Products undergo quality checks before shipping.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FMCG Products Grid -->
-            <div class="products-grid" id="fmcgProducts">
-                <!-- FMCG products will be loaded here dynamically -->
-            </div>
-
-            <!-- Storage Guide -->
-            <div class="filters mt-12">
-                <h3 class="filter-title mb-6" style="font-size: 1.25rem;">
-                    <i class="fas fa-warehouse"></i> Storage & Handling Guide
-                </h3>
-                <div class="grid grid-cols-3 gap-6">
-                    <div class="feature-card">
-                        <div class="feature-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
-                            <i class="fas fa-temperature-low"></i>
-                        </div>
-                        <h3 class="feature-title">Ambient Storage</h3>
-                        <p class="feature-description">Store in cool, dry place away from direct sunlight</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);">
-                            <i class="fas fa-snowflake"></i>
-                        </div>
-                        <h3 class="feature-title">Refrigerated Items</h3>
-                        <p class="feature-description">Immediately refrigerate upon arrival at 2-8°C</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h3 class="feature-title">Best Before Dates</h3>
-                        <p class="feature-description">Products are safe after dates but may lose optimal quality</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sell Section -->
-    <section class="section" id="sell" style="background: linear-gradient(135deg, #F9F9F9 0%, #FFFFFF 100%);">
-        <div class="container">
-            <div class="text-center mb-12">
-                <h2 class="section-title">Sell Your Deadstock</h2>
-                <p class="section-subtitle">Turn excess inventory into cash flow while reducing waste. Join our network of sustainable sellers.</p>
-            </div>
-
-            <!-- Seller Dashboard Preview -->
-            <div class="dashboard">
-                <div class="dashboard-header">
-                    <div class="dashboard-welcome">
-                        <div class="dashboard-avatar">
-                            <i class="fas fa-store"></i>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Seller Dashboard</h3>
-                            <p style="opacity: 0.9;">Welcome back, EcoFashion Co.</p>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-stats">
-                        <div class="dashboard-stat">
-                            <div class="stat-value">$12,456</div>
-                            <div class="stat-label">Revenue (30 days)</div>
-                        </div>
-                        <div class="dashboard-stat">
-                            <div class="stat-value">189</div>
-                            <div class="stat-label">Products Sold</div>
-                        </div>
-                        <div class="dashboard-stat">
-                            <div class="stat-value">2.45</div>
-                            <div class="stat-label">Tons Waste Diverted</div>
-                        </div>
-                        <div class="dashboard-stat">
-                            <div class="stat-value">4.2</div>
-                            <div class="stat-label">Avg. Days to Sell</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-content">
-                    <div class="text-center">
-                        <div style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Ready to Get Started?</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
-                            Join hundreds of brands already reducing waste and generating revenue through StockShift.
-                        </p>
-                        <div class="hero-buttons justify-center">
-                            <button class="btn btn-primary btn-lg" onclick="openSellModal()">
-                                Start Selling <i class="fas fa-rocket"></i>
-                            </button>
-                            <button class="btn btn-outline btn-lg" onclick="openSellerGuide()">
-                                Seller Guide <i class="fas fa-book"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="container">
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="logo" style="margin-bottom: 1.5rem;">
-                        <div class="logo-icon">
-                            <i class="fas fa-recycle"></i>
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <div class="logo-icon" style="width: 32px; height: 32px;">
+                            <i class="fas fa-clock"></i>
                         </div>
                         <div class="logo-text">
-                            <h1 style="color: white;">StockShift</h1>
-                            <span style="color: #B0B0B0;">Rescue. Redistribute. Renew.</span>
+                            <h1 style="font-size: 20px;">StockShift</h1>
+                            <span style="font-size: 10px;">Race Against Time</span>
                         </div>
                     </div>
-                    <p style="color: #B0B0B0; margin-bottom: 1.5rem; line-height: 1.6;">
-                        Connecting businesses with excess inventory to buyers seeking quality products at discounted prices. 
-                        Together, we're building a more sustainable future by reducing commercial waste.
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        We're racing against time to rescue quality products from expiration. Join the mission.
                     </p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h3 class="footer-title">For Buyers</h3>
-                    <ul class="footer-links">
-                        <li><a href="#fashion">Fashion Deadstock</a></li>
-                        <li><a href="#fmcg">FMCG Overstock</a></li>
-                        <li><a href="#bulk">Bulk Lots</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#protection">Buyer Protection</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3 class="footer-title">For Sellers</h3>
-                    <ul class="footer-links">
-                        <li><a href="#sell">Sell on StockShift</a></li>
-                        <li><a href="#dashboard">Seller Dashboard</a></li>
-                        <li><a href="#pricing">Pricing & Fees</a></li>
-                        <li><a href="#resources">Seller Resources</a></li>
-                        <li><a href="#success">Success Stories</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3 class="footer-title">Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#press">Press</a></li>
-                        <li><a href="#sustainability">Sustainability</a></li>
-                        <li><a href="#impact">Impact Report</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3 class="footer-title">Contact</h3>
-                    <div class="footer-contact">
+                    <div class="footer-contact" style="margin-top: 30px;">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>support@stockshift.com</span>
+                            <span>rescue@stockshift.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>1-800-STOCK-SHIFT</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>San Francisco, CA</span>
+                            <span>1-888-RESCUE-NOW</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Rescue Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-fire" style="color: var(--urgency-red); margin-right: 8px;"></i> Critical (24h)</a></li>
+                        <li><a href="#"><i class="fas fa-exclamation-triangle" style="color: var(--urgency-orange); margin-right: 8px;"></i> Urgent (48h)</a></li>
+                        <li><a href="#"><i class="fas fa-clock" style="color: var(--urgency-yellow); margin-right: 8px;"></i> Warning (7 days)</a></li>
+                        <li><a href="#"><i class="fas fa-leaf" style="color: var(--urgency-green); margin-right: 8px;"></i> Safe (30+ days)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Join The Mission</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-store"></i> Sell Your Stock</a></li>
+                        <li><a href="#"><i class="fas fa-hands-helping"></i> Charity Partners</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i> Logistics Partners</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Impact Dashboard</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#story"><i class="fas fa-book"></i> Our Story</a></li>
+                        <li><a href="#about"><i class="fas fa-question-circle"></i> How It Works</a></li>
+                        <li><a href="#"><i class="fas fa-newspaper"></i> Impact Reports</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Sustainability</a></li>
+                    </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <div class="copyright">
-                    © 2024 StockShift. All rights reserved.
+                <div>
+                    © 2024 StockShift. Every second counts in the race against waste.
                 </div>
-                <div class="footer-bottom-links">
-                    <a href="#privacy">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
-                    <a href="#cookies">Cookie Policy</a>
-                    <a href="#sitemap">Sitemap</a>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-youtube"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Cart Modal -->
-    <div class="modal-overlay" id="cartOverlay"></div>
-    <div class="modal cart-modal" id="cartModal">
-        <div class="modal-header">
-            <h3 class="modal-title">Your Cart</h3>
-            <button class="modal-close" onclick="closeCart()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-content">
-            <div class="cart-items" id="cartItems">
-                <!-- Cart items will be loaded here -->
-            </div>
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cartTotal">$0.00</span>
-            </div>
-            <button class="btn btn-primary btn-full" onclick="checkout()">
-                Proceed to Checkout <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Sell Modal -->
-    <div class="modal-overlay" id="sellOverlay"></div>
-    <div class="modal" id="sellModal" style="width: 500px;">
-        <div class="modal-header">
-            <h3 class="modal-title">Start Selling</h3>
-            <button class="modal-close" onclick="closeSellModal()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-content">
-            <form id="sellForm">
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Business Name</label>
-                    <input type="text" class="search-input" placeholder="Your business name" required>
-                </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email Address</label>
-                    <input type="email" class="search-input" placeholder="business@email.com" required>
-                </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone Number</label>
-                    <input type="tel" class="search-input" placeholder="+1 (555) 000-0000" required>
-                </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">What type of products do you sell?</label>
-                    <select class="search-input" required>
-                        <option value="">Select category</option>
-                        <option value="fashion">Fashion / Apparel</option>
-                        <option value="footwear">Footwear</option>
-                        <option value="accessories">Accessories</option>
-                        <option value="fmcg">FMCG / Grocery</option>
-                        <option value="personal-care">Personal Care</option>
-                        <option value="household">Household Items</option>
-                    </select>
-                </div>
-                <div style="margin-bottom: 2rem;">
-                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Estimated monthly volume</label>
-                    <select class="search-input" required>
-                        <option value="">Select volume</option>
-                        <option value="1-10">1-10 units</option>
-                        <option value="11-50">11-50 units</option>
-                        <option value="51-200">51-200 units</option>
-                        <option value="201-1000">201-1,000 units</option>
-                        <option value="1000+">1,000+ units</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">
-                    Start Selling <i class="fas fa-rocket"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <div class="notification-icon">
-            <i class="fas fa-check"></i>
-        </div>
-        <div class="notification-content">
-            <div class="notification-title" id="notificationTitle">Success!</div>
-            <div class="notification-message" id="notificationMessage">Product added to cart</div>
-        </div>
-        <button class="notification-close" onclick="closeNotification()">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
-    <!-- JavaScript -->
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- JAVASCRIPT -->
     <script>
-        // ===== STATE MANAGEMENT =====
-        const state = {
-            cart: JSON.parse(localStorage.getItem('stockshift_cart')) || [],
-            products: {
-                fashion: [
-                    {
-                        id: 1,
-                        name: "Premium Cotton T-Shirts",
-                        category: "apparel",
-                        description: "Organic cotton, brand new without tags. Overrun from sustainable brand production.",
-                        price: 12.99,
-                        originalPrice: 45.99,
-                        discount: 72,
-                        stock: 450,
-                        condition: "New without tags",
-                        size: ["S", "M", "L", "XL"],
-                        color: "Black",
-                        badges: ["sample", "bulk"],
-                        image: "👕"
-                    },
-                    {
-                        id: 2,
-                        name: "Running Shoes - Last Season",
-                        category: "footwear",
-                        description: "High-performance running shoes, perfect condition. Last season's models.",
-                        price: 34.99,
-                        originalPrice: 129.99,
-                        discount: 73,
-                        stock: 200,
-                        condition: "New with tags",
-                        size: ["7", "8", "9", "10", "11", "12"],
-                        color: "Blue",
-                        badges: ["bulk"],
-                        image: "👟"
-                    },
-                    {
-                        id: 3,
-                        name: "Designer Leather Handbags",
-                        category: "accessories",
-                        description: "Genuine leather handbags, minor packaging variations.",
-                        price: 89.99,
-                        originalPrice: 299.99,
-                        discount: 70,
-                        stock: 85,
-                        condition: "New with tags",
-                        size: ["One Size"],
-                        color: "Brown",
-                        badges: ["new"],
-                        image: "👜"
-                    },
-                    {
-                        id: 4,
-                        name: "Organic Cotton Fabric Rolls",
-                        category: "fabrics",
-                        description: "220 GSM organic cotton fabric. Overrun from luxury brand production.",
-                        price: 6.99,
-                        originalPrice: 24.99,
-                        discount: 72,
-                        stock: 1200,
-                        condition: "New",
-                        size: ["Roll"],
-                        color: "White",
-                        badges: ["bulk"],
-                        image: "🧵"
-                    }
-                ],
-                fmcg: [
-                    {
-                        id: 5,
-                        name: "Organic Breakfast Cereal",
-                        category: "food",
-                        description: "12-pack case, packaging redesign overstock. Best before Dec 15, 2024.",
-                        price: 12.99,
-                        originalPrice: 45.00,
-                        discount: 71,
-                        stock: 250,
-                        condition: "New",
-                        expiry: "2024-12-15",
-                        storage: "Ambient",
-                        badges: ["expiring"],
-                        image: "🥣"
-                    },
-                    {
-                        id: 6,
-                        name: "Luxury Hand Soap",
-                        category: "personal-care",
-                        description: "Discontinued fragrance, 24-pack case. Best before Jan 30, 2025.",
-                        price: 18.99,
-                        originalPrice: 72.00,
-                        discount: 74,
-                        stock: 120,
-                        condition: "New",
-                        expiry: "2025-01-30",
-                        storage: "Ambient",
-                        badges: ["expiring"],
-                        image: "🧴"
-                    },
-                    {
-                        id: 7,
-                        name: "Eco-Friendly Detergent",
-                        category: "household",
-                        description: "Formula update overstock, 48-pack case. Best before Mar 15, 2025.",
-                        price: 24.99,
-                        originalPrice: 96.00,
-                        discount: 74,
-                        stock: 85,
-                        condition: "New",
-                        expiry: "2025-03-15",
-                        storage: "Ambient",
-                        badges: ["new"],
-                        image: "🧼"
-                    },
-                    {
-                        id: 8,
-                        name: "Vitamin Supplements",
-                        category: "health",
-                        description: "Packaging change, 100-pack bottles. Best before Feb 28, 2025.",
-                        price: 39.99,
-                        originalPrice: 150.00,
-                        discount: 73,
-                        stock: 300,
-                        condition: "New",
-                        expiry: "2025-02-28",
-                        storage: "Ambient",
-                        badges: ["bulk"],
-                        image: "💊"
-                    }
-                ]
-            },
-            filters: {
-                fashion: {
-                    category: 'all',
-                    price: [],
-                    size: [],
-                    color: [],
-                    condition: []
+        // ===== URGENCY-FOCUSED DATA =====
+        const urgencyData = {
+            products: [
+                {
+                    id: 1,
+                    name: "Organic Breakfast Cereal - 48 Pack",
+                    category: "FMCG • FOOD",
+                    description: "Premium organic cereal. Best before in 14 hours. Stock must move TODAY.",
+                    price: 9.99,
+                    originalPrice: 45.00,
+                    discount: 78,
+                    stock: 45,
+                    location: "Warehouse A",
+                    urgency: "critical", // critical, warning, safe
+                    hoursLeft: 14,
+                    percentageLeft: 15,
+                    image: "🥣",
+                    badges: ["critical", "bulk"]
                 },
-                fmcg: {
-                    category: 'all',
-                    expiry: [],
-                    storage: []
+                {
+                    id: 2,
+                    name: "Designer Cotton T-Shirts",
+                    category: "FASHION • APPAREL",
+                    description: "Last season's collection. Must clear before new shipment arrives in 22 hours.",
+                    price: 8.50,
+                    originalPrice: 45.99,
+                    discount: 82,
+                    stock: 120,
+                    location: "Outlet Center",
+                    urgency: "critical",
+                    hoursLeft: 22,
+                    percentageLeft: 25,
+                    image: "👕",
+                    badges: ["critical", "fashion"]
+                },
+                {
+                    id: 3,
+                    name: "Luxury Hand Soap Collection",
+                    category: "FMCG • PERSONAL CARE",
+                    description: "Discontinued fragrance. Expires in 36 hours. Perfect for hotels/spas.",
+                    price: 14.99,
+                    originalPrice: 72.00,
+                    discount: 79,
+                    stock: 85,
+                    location: "Distribution Center",
+                    urgency: "warning",
+                    hoursLeft: 36,
+                    percentageLeft: 40,
+                    image: "🧴",
+                    badges: ["warning", "bulk"]
+                },
+                {
+                    id: 4,
+                    name: "Premium Coffee Beans - 5kg",
+                    category: "FMCG • BEVERAGES",
+                    description: "Single-origin beans. Roasted 4 weeks ago. Best within 60 hours.",
+                    price: 19.99,
+                    originalPrice: 89.99,
+                    discount: 78,
+                    stock: 32,
+                    location: "Roastery",
+                    urgency: "warning",
+                    hoursLeft: 60,
+                    percentageLeft: 65,
+                    image: "☕",
+                    badges: ["warning", "premium"]
+                },
+                {
+                    id: 5,
+                    name: "Running Shoes - Overstock",
+                    category: "FASHION • FOOTWEAR",
+                    description: "Previous season models. Good condition. 7 days to clear for new inventory.",
+                    price: 29.99,
+                    originalPrice: 129.99,
+                    discount: 77,
+                    stock: 200,
+                    location: "Sportswear Outlet",
+                    urgency: "safe",
+                    hoursLeft: 168,
+                    percentageLeft: 80,
+                    image: "👟",
+                    badges: ["safe", "bulk"]
+                },
+                {
+                    id: 6,
+                    name: "Vitamin Supplements",
+                    category: "FMCG • HEALTH",
+                    description: "Expiry in 12 hours! Must ship immediately. Bulk purchase available.",
+                    price: 24.99,
+                    originalPrice: 150.00,
+                    discount: 83,
+                    stock: 150,
+                    location: "Pharmacy Warehouse",
+                    urgency: "critical",
+                    hoursLeft: 12,
+                    percentageLeft: 10,
+                    image: "💊",
+                    badges: ["critical", "health"]
+                },
+                {
+                    id: 7,
+                    name: "Organic Pasta - Restaurant Pack",
+                    category: "FMCG • FOOD",
+                    description: "10kg bags. 48 hours until best before date. Perfect for restaurants.",
+                    price: 12.99,
+                    originalPrice: 65.00,
+                    discount: 80,
+                    stock: 75,
+                    location: "Food Distributor",
+                    urgency: "warning",
+                    hoursLeft: 48,
+                    percentageLeft: 50,
+                    image: "🍝",
+                    badges: ["warning", "bulk"]
+                },
+                {
+                    id: 8,
+                    name: "Eco-Friendly Detergent",
+                    category: "FMCG • HOUSEHOLD",
+                    description: "Formula update. 5 days until production halt. Sustainable packaging.",
+                    price: 16.99,
+                    originalPrice: 96.00,
+                    discount: 82,
+                    stock: 300,
+                    location: "Eco Warehouse",
+                    urgency: "safe",
+                    hoursLeft: 120,
+                    percentageLeft: 75,
+                    image: "🧼",
+                    badges: ["safe", "eco"]
                 }
+            ],
+            stats: {
+                rescued: 42891,
+                expiring: 245,
+                expired: 38,
+                wasteDiverted: 187.5,
+                charityImpact: 125000,
+                co2Saved: 1245
             },
-            currentUser: null
+            timeline: {
+                rescuedToday: 0,
+                expiringToday: 0,
+                expiredToday: 0
+            }
         };
 
         // ===== DOM ELEMENTS =====
         const elements = {
-            cartBtn: document.getElementById('cartBtn'),
-            cartModal: document.getElementById('cartModal'),
-            cartOverlay: document.getElementById('cartOverlay'),
-            cartItems: document.getElementById('cartItems'),
-            cartTotal: document.getElementById('cartTotal'),
-            cartCount: document.getElementById('cartCount'),
-            searchInput: document.getElementById('searchInput'),
-            nav: document.getElementById('nav'),
-            mobileMenuBtn: document.getElementById('mobileMenuBtn'),
-            notification: document.getElementById('notification'),
-            fashionProducts: document.getElementById('fashionProducts'),
-            fmcgProducts: document.getElementById('fmcgProducts'),
-            sellModal: document.getElementById('sellModal'),
-            sellOverlay: document.getElementById('sellOverlay')
+            globalTimer: document.getElementById('globalTimer'),
+            timelineFill: document.getElementById('timelineFill'),
+            rescuedCount: document.getElementById('rescuedCount'),
+            expiringCount: document.getElementById('expiringCount'),
+            expiredCount: document.getElementById('expiredCount'),
+            productsGrid: document.getElementById('productsGrid'),
+            totalRescues: document.getElementById('totalRescues'),
+            wasteDiverted: document.getElementById('wasteDiverted'),
+            charityImpact: document.getElementById('charityImpact'),
+            co2Saved: document.getElementById('co2Saved')
         };
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', () => {
-            init();
+            initializeUrgency();
+            initializeAnimations();
+            initializeEventListeners();
         });
 
-        function init() {
-            // Initialize product displays
-            renderFashionProducts();
-            renderFMCGProducts();
+        function initializeUrgency() {
+            // Sort products by urgency (critical first)
+            urgencyData.products.sort((a, b) => {
+                const urgencyOrder = { critical: 0, warning: 1, safe: 2 };
+                return urgencyOrder[a.urgency] - urgencyOrder[b.urgency] || a.hoursLeft - b.hoursLeft;
+            });
             
-            // Update cart display
-            updateCartDisplay();
-            
-            // Initialize event listeners
-            initEventListeners();
-            
-            // Initialize animations
-            initAnimations();
+            // Render products
+            renderProducts();
             
             // Initialize counters
-            initCounters();
+            updateCounters();
             
-            // Load user data
-            loadUserData();
+            // Start global timer
+            startGlobalTimer();
+            
+            // Start individual product countdowns
+            startProductCountdowns();
+            
+            // Update timeline
+            updateTimeline();
         }
 
-        function initEventListeners() {
-            // Cart
-            elements.cartBtn.addEventListener('click', openCart);
-            elements.cartOverlay.addEventListener('click', closeCart);
+        function renderProducts(filter = 'all') {
+            const container = elements.productsGrid;
+            let productsToShow = urgencyData.products;
             
-            // Mobile menu
-            elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            
-            // Search
-            elements.searchInput.addEventListener('input', handleSearch);
-            
-            // Category tabs
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const category = btn.dataset.category;
-                    state.filters.fashion.category = category;
-                    renderFashionProducts();
-                });
-            });
-            
-            // Filter checkboxes
-            document.querySelectorAll('.filter-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    const checkbox = option.querySelector('.filter-checkbox');
-                    checkbox.classList.toggle('checked');
-                    
-                    const filter = option.dataset.filter;
-                    const value = option.dataset.value;
-                    
-                    if (checkbox.classList.contains('checked')) {
-                        if (!state.filters.fashion[filter].includes(value)) {
-                            state.filters.fashion[filter].push(value);
-                        }
-                    } else {
-                        state.filters.fashion[filter] = state.filters.fashion[filter].filter(v => v !== value);
-                    }
-                    
-                    renderFashionProducts();
-                });
-            });
-            
-            // Form submissions
-            document.getElementById('sellForm')?.addEventListener('submit', handleSellForm);
-            
-            // Scroll events
-            window.addEventListener('scroll', handleScroll);
-            
-            // Keyboard shortcuts
-            document.addEventListener('keydown', handleKeyboard);
-        }
-
-        // ===== PRODUCT RENDERING =====
-        function renderFashionProducts() {
-            const container = elements.fashionProducts;
-            const products = filterProducts(state.products.fashion, state.filters.fashion);
-            
-            container.innerHTML = products.map(product => `
-                <div class="product-card" data-id="${product.id}">
-                    <div class="product-badges">
-                        ${product.badges.map(badge => `
-                            <span class="badge ${badge === 'bulk' ? 'badge-accent' : badge === 'sample' ? 'badge-warning' : 'badge-primary'}">
-                                ${badge === 'bulk' ? 'Bulk' : badge === 'sample' ? 'Sample' : 'New'}
-                            </span>
-                        `).join('')}
-                    </div>
-                    <div class="product-image">
-                        <div style="font-size: 3rem;">${product.image}</div>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-category">${product.category.toUpperCase()}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-price">
-                            <span class="price-original">$${product.originalPrice.toFixed(2)}</span>
-                            <span class="price-current">$${product.price.toFixed(2)}</span>
-                            <span class="price-discount">${product.discount}% OFF</span>
-                        </div>
-                        <div class="product-meta">
-                            <div class="product-stock">
-                                <i class="fas fa-box"></i>
-                                <span>${product.stock} units</span>
-                            </div>
-                            <div class="product-condition">
-                                <i class="fas fa-tag"></i>
-                                <span>${product.condition}</span>
-                            </div>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id})">
-                                <i class="fas fa-cart-plus"></i> Add to Cart
-                            </button>
-                            <button class="btn btn-outline btn-sm" onclick="viewProduct(${product.id})">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderFMCGProducts() {
-            const container = elements.fmcgProducts;
-            
-            container.innerHTML = state.products.fmcg.map(product => `
-                <div class="product-card fmcg-card" data-id="${product.id}">
-                    <div class="product-badges">
-                        <span class="badge ${product.badges.includes('expiring') ? 'badge-warning' : 'badge-primary'}">
-                            ${product.badges.includes('expiring') ? 'Expiring Soon' : 'New'}
-                        </span>
-                    </div>
-                    <div class="product-image">
-                        <div style="font-size: 3rem;">${product.image}</div>
-                    </div>
-                    <div class="product-content">
-                        <div class="expiry-info">
-                            <div class="expiry-date">
-                                <i class="fas fa-calendar-alt"></i>
-                                Best Before: ${formatDate(product.expiry)}
-                            </div>
-                        </div>
-                        <div class="product-category">${product.category.toUpperCase().replace('-', ' ')}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-price">
-                            <span class="price-original">$${product.originalPrice.toFixed(2)}</span>
-                            <span class="price-current">$${product.price.toFixed(2)}</span>
-                            <span class="price-discount">${product.discount}% OFF</span>
-                        </div>
-                        <div class="product-meta">
-                            <div class="product-stock">
-                                <i class="fas fa-box"></i>
-                                <span>${product.stock} units</span>
-                            </div>
-                            <div class="product-condition">
-                                <i class="fas fa-warehouse"></i>
-                                <span>${product.storage}</span>
-                            </div>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id})">
-                                <i class="fas fa-cart-plus"></i> Add to Cart
-                            </button>
-                            <button class="btn btn-outline btn-sm" onclick="viewProduct(${product.id})">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterProducts(products, filters) {
-            return products.filter(product => {
-                // Category filter
-                if (filters.category !== 'all' && product.category !== filters.category) {
-                    return false;
-                }
-                
-                // Price filter
-                if (filters.price.length > 0) {
-                    const priceRanges = filters.price.map(range => range.split('-').map(Number));
-                    const inPriceRange = priceRanges.some(([min, max]) => {
-                        const price = product.price;
-                        return price >= min && price <= max;
-                    });
-                    if (!inPriceRange) return false;
-                }
-                
-                // Size filter
-                if (filters.size.length > 0) {
-                    if (!filters.size.some(size => product.size.includes(size))) {
-                        return false;
-                    }
-                }
-                
-                // Color filter
-                if (filters.color.length > 0) {
-                    if (!filters.color.includes(product.color.toLowerCase())) {
-                        return false;
-                    }
-                }
-                
-                // Condition filter
-                if (filters.condition.length > 0) {
-                    const conditionMap = {
-                        'new': 'New with tags',
-                        'sample': 'Sample',
-                        'overrun': 'Overrun'
-                    };
-                    const conditions = filters.condition.map(c => conditionMap[c]);
-                    if (!conditions.includes(product.condition)) {
-                        return false;
-                    }
-                }
-                
-                return true;
-            });
-        }
-
-        // ===== CART FUNCTIONALITY =====
-        function addToCart(productId) {
-            // Find product in all categories
-            let product = null;
-            for (const category in state.products) {
-                product = state.products[category].find(p => p.id === productId);
-                if (product) break;
+            if (filter !== 'all') {
+                productsToShow = urgencyData.products.filter(p => p.urgency === filter);
             }
             
-            if (!product) return;
-            
-            // Check if product already in cart
-            const existingItem = state.cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                state.cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
-            
-            // Save to localStorage
-            saveCart();
-            
-            // Update display
-            updateCartDisplay();
-            
-            // Show notification
-            showNotification('Success!', `${product.name} added to cart`);
-        }
-
-        function removeFromCart(productId) {
-            state.cart = state.cart.filter(item => item.id !== productId);
-            saveCart();
-            updateCartDisplay();
-        }
-
-        function updateCartQuantity(productId, change) {
-            const item = state.cart.find(item => item.id === productId);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    removeFromCart(productId);
-                } else {
-                    saveCart();
-                    updateCartDisplay();
-                }
-            }
-        }
-
-        function updateCartDisplay() {
-            // Update cart count
-            const totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
-            elements.cartCount.textContent = totalItems;
-            
-            // Update cart modal content
-            if (state.cart.length === 0) {
-                elements.cartItems.innerHTML = `
-                    <div style="text-align: center; padding: 3rem 1rem;">
-                        <div style="font-size: 4rem; color: var(--border); margin-bottom: 1rem;">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Your cart is empty</h3>
-                        <p style="color: var(--text-tertiary);">Add some products to get started!</p>
-                    </div>
-                `;
-                elements.cartTotal.textContent = '$0.00';
-                return;
-            }
-            
-            let cartHTML = '';
-            let total = 0;
-            
-            state.cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
+            container.innerHTML = productsToShow.map(product => {
+                const urgencyClass = product.urgency;
+                const urgencyText = product.urgency === 'critical' ? 'CRITICAL' : 
+                                   product.urgency === 'warning' ? 'WARNING' : 'SAFE';
                 
-                cartHTML += `
-                    <div class="cart-item">
-                        <div class="cart-item-image">
-                            <div style="font-size: 2rem; display: flex; align-items: center; justify-content: center; height: 100%;">
-                                ${item.image}
+                const urgencyIcon = product.urgency === 'critical' ? 'fas fa-fire' :
+                                   product.urgency === 'warning' ? 'fas fa-exclamation-triangle' :
+                                   'fas fa-clock';
+                
+                return `
+                    <div class="product-card ${urgencyClass === 'critical' ? 'critical' : ''}" data-id="${product.id}">
+                        <div class="product-urgency">
+                            <div class="urgency-badge ${urgencyClass}">
+                                <i class="${urgencyIcon}"></i> ${urgencyText} • ${product.hoursLeft}h
                             </div>
                         </div>
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, -1)">-</button>
-                                <span>${item.quantity}</span>
-                                <button class="quantity-btn" onclick="updateCartQuantity(${item.id}, 1)">+</button>
-                                <button class="cart-item-remove" onclick="removeFromCart(${item.id})" style="margin-left: auto;">
-                                    Remove
+                        
+                        <div class="product-image">
+                            <div style="font-size: 4rem;">${product.image}</div>
+                            
+                            <div class="product-countdown">
+                                <div class="countdown-bar">
+                                    <div class="countdown-fill ${urgencyClass}" 
+                                         style="width: ${product.percentageLeft}%"></div>
+                                </div>
+                                <div class="countdown-text">
+                                    <span class="countdown-time">${formatTime(product.hoursLeft * 3600)}</span>
+                                    <span class="countdown-label-small">TIME REMAINING</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-content">
+                            <div class="product-category">${product.category}</div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            
+                            <div class="product-price">
+                                <span class="price-original">$${product.originalPrice.toFixed(2)}</span>
+                                <span class="price-current">$${product.price.toFixed(2)}</span>
+                                <span class="price-discount">${product.discount}% OFF</span>
+                            </div>
+                            
+                            <div class="product-meta">
+                                <div class="product-stock">
+                                    <i class="fas fa-box"></i>
+                                    <span>${product.stock} units left</span>
+                                </div>
+                                <div class="product-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${product.location}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="product-actions">
+                                <button class="btn btn-rescue" onclick="rescueProduct(${product.id})">
+                                    <i class="fas fa-bolt"></i> RESCUE NOW
+                                </button>
+                                <button class="btn btn-view" onclick="viewProduct(${product.id})">
+                                    <i class="fas fa-eye"></i> DETAILS
                                 </button>
                             </div>
                         </div>
                     </div>
                 `;
-            });
+            }).join('');
+        }
+
+        function startGlobalTimer() {
+            let totalSeconds = 24 * 3600; // 24 hours in seconds
             
-            elements.cartItems.innerHTML = cartHTML;
-            elements.cartTotal.textContent = `$${total.toFixed(2)}`;
-        }
-
-        function saveCart() {
-            localStorage.setItem('stockshift_cart', JSON.stringify(state.cart));
-        }
-
-        function checkout() {
-            if (state.cart.length === 0) {
-                showNotification('Error', 'Your cart is empty!', 'error');
-                return;
+            function updateTimer() {
+                totalSeconds--;
+                if (totalSeconds < 0) {
+                    totalSeconds = 24 * 3600; // Reset
+                    // Simulate new batch of products
+                    simulateNewBatch();
+                }
+                
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                
+                elements.globalTimer.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Update timeline fill based on time
+                const percentage = (totalSeconds / (24 * 3600)) * 100;
+                elements.timelineFill.style.width = `${100 - percentage}%`;
             }
             
-            const total = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            showNotification('Success!', `Proceeding to checkout: $${total.toFixed(2)}`);
+            // Update immediately
+            updateTimer();
             
-            // In a real app, this would redirect to checkout page
-            console.log('Checkout initiated:', state.cart);
-            
-            // Clear cart after checkout
-            state.cart = [];
-            saveCart();
-            updateCartDisplay();
-            closeCart();
+            // Update every second
+            setInterval(updateTimer, 1000);
         }
 
-        // ===== MODAL FUNCTIONS =====
-        function openCart() {
-            elements.cartModal.classList.add('active');
-            elements.cartOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeCart() {
-            elements.cartModal.classList.remove('active');
-            elements.cartOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function openSellModal() {
-            elements.sellModal.classList.add('active');
-            elements.sellOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSellModal() {
-            elements.sellModal.classList.remove('active');
-            elements.sellOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function handleSellForm(e) {
-            e.preventDefault();
-            showNotification('Success!', 'Your seller application has been submitted');
-            closeSellModal();
-            // In a real app, this would send data to backend
-        }
-
-        // ===== ANIMATIONS & EFFECTS =====
-        function initAnimations() {
-            // Animate hero stats
-            animateCounters('.hero-stats .stat-number');
-            
-            // Animate impact stats
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounters('.impact-stats .stat-value');
-                        observer.unobserve(entry.target);
+        function startProductCountdowns() {
+            setInterval(() => {
+                // Update each product's time
+                urgencyData.products.forEach(product => {
+                    if (product.hoursLeft > 0) {
+                        product.hoursLeft -= (1 / 3600); // Decrease by 1 second worth
+                        product.percentageLeft = (product.hoursLeft / 168) * 100; // 168 hours = 7 days max
+                        
+                        // Update urgency level
+                        if (product.hoursLeft < 24) {
+                            product.urgency = 'critical';
+                        } else if (product.hoursLeft < 72) {
+                            product.urgency = 'warning';
+                        } else {
+                            product.urgency = 'safe';
+                        }
                     }
                 });
-            }, { threshold: 0.5 });
-            
-            observer.observe(document.querySelector('.impact'));
-        }
-
-        function animateCounters(selector) {
-            document.querySelectorAll(selector).forEach(element => {
-                const target = parseInt(element.dataset.count || element.textContent.replace(/[^0-9.-]+/g, ""));
-                const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
                 
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    
-                    if (selector.includes('impact')) {
-                        element.textContent = formatNumber(current);
-                    } else {
-                        element.textContent = formatNumber(Math.floor(current));
-                    }
-                }, 16);
-            });
+                // Re-render products
+                renderProducts();
+                
+                // Update counters
+                updateCounters();
+            }, 1000);
         }
 
-        function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(1) + 'M';
-            }
-            if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
-            if (num % 1 !== 0) {
-                return num.toFixed(1);
-            }
-            return num.toLocaleString();
-        }
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
-            });
-        }
-
-        // ===== NOTIFICATIONS =====
-        function showNotification(title, message, type = 'success') {
-            const notification = elements.notification;
-            const icon = notification.querySelector('.notification-icon i');
-            const titleEl = document.getElementById('notificationTitle');
-            const messageEl = document.getElementById('notificationMessage');
+        function updateCounters() {
+            // Update timeline stats
+            elements.rescuedCount.textContent = urgencyData.timeline.rescuedToday;
+            elements.expiringCount.textContent = urgencyData.products.filter(p => p.urgency === 'critical').length;
+            elements.expiredCount.textContent = urgencyData.timeline.expiredToday;
             
-            // Set content
-            titleEl.textContent = title;
-            messageEl.textContent = message;
+            // Update story stats
+            elements.totalRescues.textContent = urgencyData.stats.rescued.toLocaleString();
+            elements.wasteDiverted.textContent = urgencyData.stats.wasteDiverted.toFixed(1);
+            elements.charityImpact.textContent = `$${(urgencyData.stats.charityImpact / 1000).toFixed(0)}K`;
+            elements.co2Saved.textContent = urgencyData.stats.co2Saved.toLocaleString();
+        }
+
+        function updateTimeline() {
+            // Calculate timeline progress based on rescued vs expired
+            const total = urgencyData.stats.rescued + urgencyData.timeline.expiredToday;
+            const rescuedPercentage = total > 0 ? (urgencyData.stats.rescued / total) * 100 : 0;
             
-            // Set type
-            notification.className = 'notification';
-            notification.classList.add(`notification-${type}`);
-            notification.classList.add('active');
+            // This would be more complex in a real app
+            elements.timelineFill.style.width = `${rescuedPercentage}%`;
+        }
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
             
-            // Set icon
-            icon.className = type === 'error' ? 'fas fa-exclamation-triangle' : 'fas fa-check';
-            
-            // Auto hide
-            setTimeout(() => {
-                closeNotification();
-            }, 3000);
-        }
-
-        function closeNotification() {
-            elements.notification.classList.remove('active');
-        }
-
-        // ===== NAVIGATION =====
-        function toggleMobileMenu() {
-            elements.nav.classList.toggle('active');
-        }
-
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-                closeCart();
-                elements.nav.classList.remove('active');
-            }
-        }
-
-        function handleScroll() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
+            if (hours > 0) {
+                return `${hours}h ${minutes}m`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${secs}s`;
             } else {
-                header.classList.remove('scrolled');
+                return `${secs}s`;
             }
         }
 
-        // ===== SEARCH FUNCTIONALITY =====
-        function handleSearch(e) {
-            const searchTerm = e.target.value.toLowerCase();
+        function initializeAnimations() {
+            // Add animation delays for staggered entrance
+            document.querySelectorAll('.animate-fade-up').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
             
-            if (searchTerm.length < 2) {
-                renderFashionProducts();
-                renderFMCGProducts();
-                return;
-            }
-            
-            // Search in fashion products
-            const filteredFashion = state.products.fashion.filter(product =>
-                product.name.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm) ||
-                product.category.toLowerCase().includes(searchTerm)
-            );
-            
-            // Search in FMCG products
-            const filteredFMCG = state.products.fmcg.filter(product =>
-                product.name.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm) ||
-                product.category.toLowerCase().includes(searchTerm)
-            );
-            
-            // Update displays
-            elements.fashionProducts.innerHTML = filteredFashion.map(product => `
-                <div class="product-card">
-                    <div class="product-content">
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                    </div>
-                </div>
-            `).join('');
-            
-            elements.fmcgProducts.innerHTML = filteredFMCG.map(product => `
-                <div class="product-card fmcg-card">
-                    <div class="product-content">
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                    </div>
-                </div>
-            `).join('');
+            // Initialize counter animations
+            animateCounter(elements.rescuedCount, urgencyData.timeline.rescuedToday, 0, 1500);
+            animateCounter(elements.expiringCount, urgencyData.products.filter(p => p.urgency === 'critical').length, 0, 1500);
+            animateCounter(elements.expiredCount, urgencyData.timeline.expiredToday, 0, 1500);
         }
 
-        // ===== USER FUNCTIONALITY =====
-        function loadUserData() {
-            const savedUser = localStorage.getItem('stockshift_user');
-            if (savedUser) {
-                state.currentUser = JSON.parse(savedUser);
-            }
+        function animateCounter(element, target, current, duration) {
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
         }
 
-        function openSellerGuide() {
-            showNotification('Info', 'Seller guide will open in a new window');
-            // In a real app, this would open a PDF or guide page
-        }
-
-        function viewProduct(productId) {
-            // Find product
-            let product = null;
-            for (const category in state.products) {
-                product = state.products[category].find(p => p.id === productId);
-                if (product) break;
-            }
-            
-            if (product) {
-                showNotification('Product View', `Viewing ${product.name}`);
-                // In a real app, this would open a product detail page
-            }
-        }
-
-        // ===== KEYBOARD SHORTCUTS =====
-        function handleKeyboard(e) {
-            // Ctrl/Cmd + K for search
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                elements.searchInput.focus();
-            }
-            
-            // Escape to close modals
-            if (e.key === 'Escape') {
-                closeCart();
-                closeSellModal();
-            }
-        }
-
-        // ===== UTILITY FUNCTIONS =====
-        function initCounters() {
-            // Initialize impact counters
-            const impactValues = {
-                products: 45892,
-                waste: 187.45,
-                co2: 1245,
-                charity: 125.8
+        function initializeEventListeners() {
+            // Filter buttons
+            window.filterUrgency = function(level) {
+                renderProducts(level === 'all' ? 'all' : level);
             };
             
-            document.getElementById('impactProducts').dataset.count = impactValues.products;
-            document.getElementById('impactWaste').dataset.count = impactValues.waste;
-            document.getElementById('impactCO2').dataset.count = impactValues.co2;
-            document.getElementById('impactCharity').dataset.count = impactValues.charity;
+            // Rescue button
+            window.rescueProduct = function(productId) {
+                const product = urgencyData.products.find(p => p.id === productId);
+                if (product) {
+                    // Simulate rescue
+                    urgencyData.timeline.rescuedToday++;
+                    urgencyData.stats.rescued++;
+                    product.stock = Math.max(0, product.stock - 1);
+                    
+                    // Show notification
+                    showNotification(`Rescued!`, `You saved 1 unit of ${product.name} from expiry!`, 'success');
+                    
+                    // Update displays
+                    updateCounters();
+                    updateTimeline();
+                    
+                    // If stock is 0, remove product
+                    if (product.stock === 0) {
+                        urgencyData.products = urgencyData.products.filter(p => p.id !== productId);
+                        renderProducts();
+                    }
+                }
+            };
+            
+            // View product
+            window.viewProduct = function(productId) {
+                const product = urgencyData.products.find(p => p.id === productId);
+                if (product) {
+                    showNotification(`Viewing ${product.name}`, `Urgency: ${product.urgency.toUpperCase()} | Time left: ${product.hoursLeft.toFixed(1)}h`, 'info');
+                }
+            };
+            
+            // Navigation
+            window.scrollToStory = function() {
+                document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
+            };
+            
+            window.showRescueModal = function() {
+                showNotification('Quick Rescue', 'Showing all critical items with less than 24 hours remaining', 'warning');
+                filterUrgency('critical');
+                document.getElementById('productsGrid').scrollIntoView({ behavior: 'smooth' });
+            };
         }
 
-        // Make functions available globally
-        window.addToCart = addToCart;
-        window.removeFromCart = removeFromCart;
-        window.updateCartQuantity = updateCartQuantity;
-        window.checkout = checkout;
-        window.openCart = openCart;
-        window.closeCart = closeCart;
-        window.openSellModal = openSellModal;
-        window.closeSellModal = closeSellModal;
-        window.openSellerGuide = openSellerGuide;
-        window.viewProduct = viewProduct;
-        window.scrollToSection = scrollToSection;
-        window.closeNotification = closeNotification;
+        function simulateNewBatch() {
+            // Simulate new products arriving
+            const newProduct = {
+                id: urgencyData.products.length + 1,
+                name: "New Batch - Organic Snacks",
+                category: "FMCG • FOOD",
+                description: "Just arrived. 7 days until best before date.",
+                price: 7.99,
+                originalPrice: 35.00,
+                discount: 77,
+                stock: 100,
+                location: "New Arrivals",
+                urgency: "safe",
+                hoursLeft: 168,
+                percentageLeft: 100,
+                image: "🥨",
+                badges: ["new", "safe"]
+            };
+            
+            urgencyData.products.push(newProduct);
+            renderProducts();
+            showNotification('New Batch!', 'Fresh products added to rescue mission', 'info');
+        }
+
+        function showNotification(title, message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--urgency-green)' : 
+                           type === 'warning' ? 'var(--urgency-orange)' : 
+                           'var(--urgency-blue)'};
+                color: white;
+                padding: 16px 20px;
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-card);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                max-width: 350px;
+                transform: translateX(100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+            `;
+            
+            const icon = type === 'success' ? 'fas fa-check-circle' :
+                        type === 'warning' ? 'fas fa-exclamation-triangle' :
+                        'fas fa-info-circle';
+            
+            notification.innerHTML = `
+                <i class="${icon}" style="font-size: 20px;"></i>
+                <div style="flex: 1;">
+                    <div style="font-weight: 700; margin-bottom: 4px;">${title}</div>
+                    <div style="font-size: 14px; opacity: 0.9;">${message}</div>
+                </div>
+                <button onclick="this.parentElement.remove()" style="background: none; border: none; color: white; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
     </script>
 </body>
 </html>
